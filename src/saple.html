@@ -1,0 +1,90 @@
+Apologies for the confusion. Please find the updated version of the RegistrationPage component below, with the correct handling of the `profile` and `userProfile` variables:
+
+```jsx
+import React, { useState } from 'react';
+import { useLocalStorage } from '@uidotdev/usehooks';
+
+const RegistrationPage = () => {
+  // Initialize state variables for form fields
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+
+  // Initialize the useLocalStorage hook
+  const [userProfile, setProfile] = useLocalStorage('userProfile', {});
+
+  // Handle the form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Create the user profile object
+    const newProfile = {
+      firstName,
+      lastName,
+      email,
+      phoneNumber,
+    };
+
+    // Store the user profile in local storage
+    setProfile(newProfile);
+
+    // Reset the form fields
+    setFirstName('');
+    setLastName('');
+    setEmail('');
+    setPhoneNumber('');
+  };
+
+  return (
+    <div>
+      <h1>Registration Page</h1>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="firstName">First Name:</label>
+          <input
+            type="text"
+            id="firstName"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor="lastName">Last Name:</label>
+          <input
+            type="text"
+            id="lastName"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor="phoneNumber">Phone Number:</label>
+          <input
+            type="text"
+            id="phoneNumber"
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
+          />
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  );
+};
+
+export default RegistrationPage;
+```
+
+In this version, the `userProfile` variable is declared correctly and used to store the user profile in local storage using the `setProfile` function. The `profile` variable is no longer used, so you can remove it if it's causing any confusion.
+
+Please make sure you have imported the `useLocalStorage` hook correctly.
